@@ -7,13 +7,19 @@
       <button class="button is-info">
         Enter
       </button>
+      <RestaurantCard></RestaurantCard>
     </section>
   </div>
 </template>
 
 <script>
-export default {
-  components: {}
-}
+  import RestaurantCard from '../components/RestaurantCard.vue';
+
+  export default {
+    components: {
+      RestaurantCard
+    }
+  }
 </script>
+
 <style></style>

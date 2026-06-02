@@ -39,6 +39,7 @@ export default {
   */
   modules: [
     '@nuxtjs/bulma',
+    '@nuxtjs/axios'
   ],
   /*
   ** Build configuration

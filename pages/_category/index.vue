@@ -17,11 +17,8 @@
       <div class="container">
         <section class="section">
           <div class="columns">
-            <RestaurantCard
-              v-bind="restaurant"
-              class="restaurant-card"
-              v-for="(restaurant, index) in restaurants" :key="index" 
-            />
+            <RestaurantCard v-bind="restaurant" class="restaurant-card" v-for="(restaurant, index) in restaurants"
+              :key="index" />
           </div>
         </section>
       </div>
@@ -31,22 +28,29 @@
 
 <script>
 import RestaurantCard from '~/components/RestaurantCard'
-import api from '~/services/api'
+// import api from '~/services/api'
+import { db } from '~/plugins/firebase'
 
 export default {
-    components: {
-        RestaurantCard,
-    },
-    async asyncData({ params }) {
-        try {
-            const category = params.category
-            const { data } = await api.getRestaurantsByCategory(category)
-            return { restaurants: data }
-        } catch (error) {
-            console.log(error)
-            console.log({ statusCode: 404, message: 'Category not found' })
-        }
-    } 
+  components: {
+    RestaurantCard
+  },
+  data() {
+    return {
+      restaurants: []
+    }
+  },
+  async created() {
+    await db
+      .collection('restaurants')
+      .where('category', '==', this.$route.params.category)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.restaurants.push(doc.data())
+        })
+      })
+  }
 }
 </script>
 <style>

@@ -18,7 +18,7 @@
     <div class="columns">
       <div class="column has-text-centered">
         <nuxt-link to="/" class="button is-danger">Cancelar</nuxt-link>
-        <button class="button is-primary" @click="onLogin">Login</button>
+        <button class="button is-primary" @click="onLogin">Indentificate</button>
       </div>
     </div>
   </div>
